@@ -10,26 +10,22 @@ function createFile() {
     for (let i = 0; i < 10000; i++) {
         writeStream.write('Data for writing.\n')
     }
-    console.log('create5')
     writeStream.end();
 }
 
 function addDataToFile() {
-    console.log('create3')
     const writeStream = fs.createWriteStream(dataFileName, {flags: 'a'})
     writeStream.write(`Additional data.\n`)
     writeStream.end()
 }
 
 function readFile() {
-    console.log('create2')
     const readStream = fs.createReadStream(dataFileName)
     readStream.on('data', (chunk) => console.log(chunk.toString()))
 }
 
 fs.stat(dataFileName, (err) => {
     if (err) {
-        console.log('create1')
         createFile()
     }
     readFile()
